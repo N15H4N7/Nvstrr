@@ -1,10 +1,10 @@
-from django.shortcuts import render, render_to_response,get_object_or_404,redirect
+# from django.shortcuts import render, render_to_response,get_object_or_404,redirect
 from datanalyse.models import UserPorts,User,UserMoney,TickerComp,BuyStockTable
 from django.contrib.auth import authenticate,login
 from django.http import HttpResponse
 from django.template import RequestContext
 # Create your views here.
-import models
+# import models
 import feedparser
 from django.views.generic import ListView,View,DetailView,TemplateView, FormView
 from .forms import RegistrationForm
@@ -38,8 +38,8 @@ class Sell(View):
             qty=request.POST.get('qnti')
             nm=request.POST.get('nbln')
             #print request.get_full_path()
-            print qty
-            print nm
+            print (qty)
+            print (nm)
             nm=float(nm)
             up=UserPorts.objects.get(pk=pk)
             um=UserMoney.objects.get(user=up.user)
@@ -186,7 +186,7 @@ class DetailView(DetailView):
         linkgraph = "https://chart.finance.yahoo.com/t?s=%s.BO&lang=en-IN&region=IN&width=500&height=300" % (allu)
         context["link"]=linkgraph
 
-        print allu
+        print (allu)
         try:
             for urls in search(allu, tld='co.in', lang='en', stop=20):
                 if 'wikipedia' in urls:
@@ -210,7 +210,7 @@ class DetailView(DetailView):
                                     break
 
                     context["logo"]=imurl
-                    print imurl
+                    print (imurl)
                     break
         except:
             context["summary"]="Oops, we are looking for this company's summary."
@@ -279,7 +279,7 @@ def buy_category(request):
         x= json.dumps(data)
         info = data[0]
         row=""
-        print choice
+        print (choice)
         if choice == 'last':
             row=(str(info["l_fix"]).replace(",",""))
         elif choice == 'name':
@@ -296,7 +296,7 @@ def buy_category(request):
             row=(str(info["lo"]).replace(",",""))
         else:
             row=""
-        print row
+        print (row)
         return HttpResponse(row)
         #row["name"]=(str(info["name"]))
         # c = float(str(info["c_fix"]).replace(",",""))
